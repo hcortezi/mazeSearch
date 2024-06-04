@@ -2,11 +2,28 @@ from pyamaze import maze, agent, COLOR
 
 def compute_path(my_maze, my_agent):
 
-    start = (my_maze.rows, my_maze.cols)
-    goal = (1, 1)
+    # Listas para explorar
     explored = [start]
     frontier = [start]
     dicPath = {}
+
+    # Verificação de labirinto vazio
+    if my_maze.rows == 0 or my_maze.cols == 0 or not my_maze.maze_map:
+        print("Erro de Labirinto Vazio")
+        return {}
+    
+    # Verificação de agente nulo
+    if my_agent is None:
+        print("Erro de Agente Nulo.")
+        return {}
+    
+    # Atribuição de início e saída
+    start = (my_maze.rows, my_maze.cols)
+    goal = (my_maze._goal)
+
+    # Verificação se o agente já está na célula de saída
+    if start == goal:
+        return {start: start}
 
     while frontier:
         cellAtual = frontier.pop()
@@ -28,20 +45,27 @@ def compute_path(my_maze, my_agent):
                 frontier.append(cellFilha)
                 dicPath[cellFilha] = cellAtual
 
+    # Verificação se a saída não foi encontrada
+    if goal not in dicPath:
+        print("Não foi possível encontrar um caminho até a saída.")
+        return {}
+
     path = {}
     cell = goal
     while cell != start:
         path[dicPath[cell]] = cell
         cell = dicPath[cell]
+    # Imprimir o caminho
+    print("Caminho encontrado:", path)
     return path
 
 if __name__ == "__main__":
     # cria environment
-    my_maze = maze(10, 10)
+    my_maze = maze()
     # leitura do labirinto do exercício
-    my_maze.CreateMaze(1, 1, pattern="v", theme=COLOR.light)
+    my_maze.CreateMaze(4,5,pattern="v", theme=COLOR.light)
     # criação do agente
-    my_agent = agent(my_maze, 10, 10, shape="arrow", filled=True, footprints=True)
+    my_agent = agent(my_maze,10,10, shape="arrow", filled=True, footprints=True)
     # computo do caminho que o agente vai fazer para atingir a saída
     my_path = compute_path(my_maze, my_agent)
     # execução do computo do caminho
