@@ -2,11 +2,6 @@ from pyamaze import maze, agent, COLOR
 
 def compute_path(my_maze, my_agent):
 
-    # Listas para explorar
-    explored = [start]
-    frontier = [start]
-    dicPath = {}
-
     # Verificação de labirinto vazio
     if my_maze.rows == 0 or my_maze.cols == 0 or not my_maze.maze_map:
         print("Erro de Labirinto Vazio")
@@ -21,6 +16,11 @@ def compute_path(my_maze, my_agent):
     start = (my_maze.rows, my_maze.cols)
     goal = (my_maze._goal)
 
+    # Listas para explorar
+    explored = [start]
+    frontier = [start]
+    dicPath = {}
+    
     # Verificação se o agente já está na célula de saída
     if start == goal:
         return {start: start}
