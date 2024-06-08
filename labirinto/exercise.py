@@ -7,11 +7,6 @@ def compute_path(my_maze, my_agent):
         print("Erro de Labirinto Vazio")
         return {}
     
-    # Verificação de agente nulo
-    if my_agent is None:
-        print("Erro de Agente Nulo.")
-        return {}
-    
     # Atribuição de início e saída
     start = (my_maze.rows, my_maze.cols)
     goal = (my_maze._goal)
@@ -55,6 +50,7 @@ def compute_path(my_maze, my_agent):
     while cell != start:
         path[dicPath[cell]] = cell
         cell = dicPath[cell]
+    
     # Imprimir o caminho
     print("Caminho encontrado:", path)
     return path
