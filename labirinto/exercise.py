@@ -63,9 +63,9 @@ if __name__ == "__main__":
     # cria environment
     my_maze = maze()
     # leitura do labirinto do exercício
-    my_maze.CreateMaze(4,5,pattern="v", theme=COLOR.light)
+    my_maze.CreateMaze(pattern="v", theme=COLOR.light)
     # criação do agente
-    my_agent = agent(my_maze,10,10, shape="arrow", filled=True, footprints=True)
+    my_agent = agent(my_maze, shape="arrow", filled=True, footprints=True)
     # computo do caminho que o agente vai fazer para atingir a saída
     my_path = compute_path(my_maze, my_agent)
     # execução do computo do caminho
